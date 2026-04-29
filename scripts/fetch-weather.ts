@@ -1,5 +1,8 @@
-const { writeFileSync } = require("fs");
-const { join } = require("path");
+import { writeFileSync } from "fs";
+import { join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const API_URL =
   "https://api.open-meteo.com/v1/forecast" +
@@ -8,11 +11,20 @@ const API_URL =
   "&timezone=Asia%2FTokyo" + // タイムゾーン: Asia/Tokyo
   "&forecast_days=1"; // 今日のデータのみ取得
 
+type ApiResponse = {
+  hourly: {
+    time: string[];
+    temperature_2m: number[];
+    precipitation_probability: number[];
+    weather_code: number[];
+  };
+};
+
 async function main() {
   // Open-Meteo APIの呼び出し
   const res = await fetch(API_URL);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
-  const data = await res.json();
+  const data: ApiResponse = await res.json();
 
   // フォーマット整形
   const hourly = data.hourly.time.map((isoTime, i) => ({
