@@ -1,7 +1,24 @@
+import { readFileSync } from "fs";
+import { join } from "path";
+
+import Title from "@/components/Title";
+import WeatherTable from "@/components/WeatherTable";
+import ClothingSuggestion from "@/components/ClothingSuggestion";
+
 export default function Home() {
+  // JSON読み込み
+  const raw = readFileSync(
+    join(process.cwd(), "src/data/weather.json"),
+    "utf-8",
+  );
+
+  const { updatedAt, hourly } = JSON.parse(raw);
+
   return (
-    <div className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold">東京の天気</h1>
-    </div>
+    <>
+      <Title updatedAt={updatedAt}></Title>
+      <ClothingSuggestion hourly={hourly}></ClothingSuggestion>
+      <WeatherTable hourly={hourly}></WeatherTable>
+    </>
   );
 }
