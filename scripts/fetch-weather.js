@@ -17,7 +17,7 @@ async function main() {
   // フォーマット整形
   const hourly = data.hourly.time.map((isoTime, i) => ({
     hour: parseInt(isoTime.slice(11, 13), 10),
-    temp: data.hourly.temperature_2m[i],
+    temp: Math.ceil(data.hourly.temperature_2m[i]),
     precip: data.hourly.precipitation_probability[i],
     weather: data.hourly.weather_code[i],
   }));
