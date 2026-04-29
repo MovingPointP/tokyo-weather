@@ -48,11 +48,11 @@ export default function WeatherTable({ hourly }: Props) {
           </tr>
           <tr>
             <th className="sticky left-0 bg-white px-4 py-3 text-left text-gray-500 font-medium whitespace-nowrap border-r border-gray-200">
-              降水確率
+              降水量
             </th>
             {hourly.map((item) => (
               <td key={item.hour} className="px-3 py-3 text-sky-500 whitespace-nowrap">
-                {item.precip}%
+                {item.precip}mm
               </td>
             ))}
           </tr>

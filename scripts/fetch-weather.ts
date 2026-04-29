@@ -7,7 +7,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const API_URL =
   "https://api.open-meteo.com/v1/forecast" +
   "?latitude=35.68&longitude=139.69" + // 東京の緯度経度
-  "&hourly=temperature_2m,precipitation_probability,weather_code" + // 気温, 降水確率, 天気コードを取得
+  "&hourly=temperature_2m,precipitation,weather_code" + // 気温, 降水量, 天気コードを取得
   "&timezone=Asia%2FTokyo" + // タイムゾーン: Asia/Tokyo
   "&forecast_days=1"; // 今日のデータのみ取得
 
@@ -15,7 +15,7 @@ type ApiResponse = {
   hourly: {
     time: string[];
     temperature_2m: number[];
-    precipitation_probability: number[];
+    precipitation: number[];
     weather_code: number[];
   };
 };
@@ -30,7 +30,7 @@ async function main() {
   const hourly = data.hourly.time.map((isoTime, i) => ({
     hour: parseInt(isoTime.slice(11, 13), 10),
     temp: Math.ceil(data.hourly.temperature_2m[i]),
-    precip: data.hourly.precipitation_probability[i],
+    precip: data.hourly.precipitation[i],
     weather: data.hourly.weather_code[i],
   }));
 
