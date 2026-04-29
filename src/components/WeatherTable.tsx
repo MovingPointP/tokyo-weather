@@ -13,33 +13,47 @@ type Props = {
 
 export default function WeatherTable({ hourly }: Props) {
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table>
+    <div className="overflow-x-auto rounded-xl border border-gray-200">
+      <table className="text-base text-center border-collapse">
         <tbody>
-          <tr>
-            <th>時間</th>
+          <tr className="border-b border-gray-200">
+            <th className="sticky left-0 bg-white px-4 py-3 text-left text-gray-500 font-medium whitespace-nowrap border-r border-gray-200">
+              時間
+            </th>
             {hourly.map((item) => (
-              <td key={item.hour}>{item.hour}時</td>
+              <td key={item.hour} className="px-3 py-3 text-gray-600 whitespace-nowrap min-w-12">
+                {item.hour}時
+              </td>
             ))}
           </tr>
-          <tr>
-            <th>天気</th>
+          <tr className="border-b border-gray-200">
+            <th className="sticky left-0 bg-white px-4 py-3 text-left text-gray-500 font-medium whitespace-nowrap border-r border-gray-200">
+              天気
+            </th>
             {hourly.map((item) => (
-              <td key={item.hour}>
+              <td key={item.hour} className="px-3 py-3 text-xl">
                 <WeatherIcon code={item.weather} />
               </td>
             ))}
           </tr>
-          <tr>
-            <th>気温</th>
+          <tr className="border-b border-gray-200">
+            <th className="sticky left-0 bg-white px-4 py-3 text-left text-gray-500 font-medium whitespace-nowrap border-r border-gray-200">
+              気温
+            </th>
             {hourly.map((item) => (
-              <td key={item.hour}>{item.temp}°C</td>
+              <td key={item.hour} className="px-3 py-3 text-gray-700 whitespace-nowrap">
+                {item.temp}°C
+              </td>
             ))}
           </tr>
           <tr>
-            <th>降水確率</th>
+            <th className="sticky left-0 bg-white px-4 py-3 text-left text-gray-500 font-medium whitespace-nowrap border-r border-gray-200">
+              降水確率
+            </th>
             {hourly.map((item) => (
-              <td key={item.hour}>{item.precip}%</td>
+              <td key={item.hour} className="px-3 py-3 text-sky-500 whitespace-nowrap">
+                {item.precip}%
+              </td>
             ))}
           </tr>
         </tbody>

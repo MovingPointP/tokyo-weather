@@ -15,10 +15,12 @@ export default function Home() {
   const { updatedAt, hourly } = JSON.parse(raw);
 
   return (
-    <>
-      <Title updatedAt={updatedAt}></Title>
-      <ClothingSuggestion hourly={hourly}></ClothingSuggestion>
-      <WeatherTable hourly={hourly}></WeatherTable>
-    </>
+    <main className="min-h-screen bg-white">
+      <div className="max-w-5xl mx-auto px-2 py-8 flex flex-col gap-4">
+        <Title updatedAt={updatedAt} />
+        <ClothingSuggestion hourly={hourly} />
+        <WeatherTable hourly={hourly} />
+      </div>
+    </main>
   );
 }
