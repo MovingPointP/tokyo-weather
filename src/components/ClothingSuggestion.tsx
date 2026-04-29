@@ -27,9 +27,9 @@ export default function ClothingSuggestion({ hourly }: Props) {
 
   return (
     <div className="bg-gray-50 rounded-xl px-6 py-4 flex items-center gap-2 text-gray-700 text-lg">
-      <span>朝晩: <strong>{getClothing(morningEveningTemp)}</strong></span>
+      <span>朝晩: <strong>{getClothing(morningEveningTemp)}</strong> <span className="text-gray-500 text-base">({morningEveningTemp}°C)</span></span>
       <span className="text-gray-300">|</span>
-      <span>日中: <strong>{getClothing(daytimeTemp)}</strong></span>
+      <span>日中: <strong>{getClothing(daytimeTemp)}</strong> <span className="text-gray-500 text-base">({daytimeTemp}°C)</span></span>
     </div>
   );
 }
