@@ -32,8 +32,8 @@
 
 - 毎日 **0時** と **6時**（JST）に GitHub Actions が自動実行
 - 実行順序:
-  1. `fetch-weather.js` — Open-Meteo API から取得 → `src/data/weather.json` に保存
-  2. `generate-ogp.js` — `weather.json` を読んで OGP画像を生成 → `public/ogp.png` に保存
+  1. `fetch-weather.ts` — Open-Meteo API から取得 → `src/data/weather.json` に保存
+  2. `generate-ogp.ts` — `weather.json` を読んで OGP画像を生成 → `public/ogp.png` に保存
   3. `next build` — `weather.json` を読んで静的 HTML を `out/` に出力
   4. GitHub Pages へデプロイ（`out/` フォルダ）
 
@@ -134,10 +134,10 @@
 
 ### 判定基準
 
-| 区分     | 基準気温                                          |
-| -------- | ------------------------------------------------- |
-| **朝晩** | 7〜9時・18〜21時の気温のうち**最も低いもの**      |
-| **日中** | 10〜17時の気温のうち**最も高いもの**              |
+| 区分     | 基準気温                                     |
+| -------- | -------------------------------------------- |
+| **朝晩** | 7〜9時・18〜21時の気温のうち**最も低いもの** |
+| **日中** | 10〜17時の気温のうち**最も高いもの**         |
 
 ### 服装テーブル
 
@@ -161,8 +161,8 @@ tokyo-weather/
 │   └── workflows/
 │       └── update-weather.yml   # cron実行・デプロイ
 ├── scripts/
-│   ├── fetch-weather.js         # 天気取得 → src/data/weather.json
-│   └── generate-ogp.js          # weather.json → public/ogp.png (satori使用)
+│   ├── fetch-weather.ts         # 天気取得 → src/data/weather.json
+│   └── generate-ogp.ts          # weather.json → public/ogp.png (satori使用)
 ├── src/
 │   ├── app/
 │   │   └── page.tsx             # weather.jsonを読んで表示（Next.js App Router）
@@ -176,12 +176,12 @@ tokyo-weather/
 
 ## スクリプト詳細
 
-### fetch-weather.js
+### fetch-weather.ts
 
 - Open-Meteo API を叩いて時間別データを取得
 - `src/data/weather.json` に保存
 
-### generate-ogp.js
+### generate-ogp.ts
 
 - `weather.json` を読み込む
 - **satori**（Vercel製）で JSX → SVG → PNG に変換
