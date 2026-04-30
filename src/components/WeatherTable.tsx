@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import WeatherIcon from "@/components/WeatherIcon";
+import Weather from "@/components/Weather";
 
 type HourlyItem = {
   hour: number;
@@ -69,7 +69,7 @@ export default function WeatherTable({ hourly }: Props) {
             </th>
             {hourly.map((item) => (
               <td key={item.hour} className="px-3 py-3 text-xl">
-                <WeatherIcon code={item.weather} />
+                <Weather code={item.weather} />
               </td>
             ))}
           </tr>
