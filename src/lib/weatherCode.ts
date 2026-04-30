@@ -1,7 +1,7 @@
 export function getWeatherType(code: number): string {
   if (code === 0) return "sunny"; // 晴れ
-  if (code === 1) return "mostly-sunny"; // 晴れ時々曇り
-  if (code === 2) return "partly-cloudy"; // 曇り時々晴れ
+  if (code === 1) return "mostlySunny"; // 晴れ時々曇り
+  if (code === 2) return "partlyCloudy"; // 曇り時々晴れ
   if (code === 3) return "cloudy"; // 曇り
   if (code === 45 || code === 48) return "fog"; // 霧
   if (code >= 51 && code <= 55) return "drizzle"; // 霧雨
