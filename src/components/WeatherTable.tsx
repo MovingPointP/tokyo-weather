@@ -14,28 +14,32 @@ type Props = {
   hourly: HourlyItem[];
 };
 
+// 初期スクロール位置
+const INITIAL_HOUR = 6;
+
+// 初期表示で、左端を特定の列になるように自動スクロール
+function scrollToInitialHour(container: HTMLDivElement) {
+  const cell = container.querySelector<HTMLElement>(
+    `td[data-hour='${INITIAL_HOUR}']`,
+  );
+  if (!cell) return;
+
+  const th = container.querySelector<HTMLElement>("th");
+  if (!th) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const cellRect = cell.getBoundingClientRect();
+
+  container.scrollLeft += cellRect.left - containerRect.left - th.offsetWidth;
+}
+
 export default function WeatherTable({ hourly }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  //  初期表示で「6時」の列が左端に来るよう自動スクロール
   useEffect(() => {
     if (!scrollRef.current) return;
-
-    // 「6時」の列の要素取得
-    const cell =
-      scrollRef.current.querySelector<HTMLElement>("td[data-hour='6']");
-    if (!cell) return;
-
-    // 見出し列の要素取得
-    const th = scrollRef.current.querySelector<HTMLElement>("th");
-
-    const thWidth = th ? th.offsetWidth : 0;
-    const containerRect = scrollRef.current.getBoundingClientRect();
-    const cellRect = cell.getBoundingClientRect();
-
-    // スクロールの初期位置を変更
-    scrollRef.current.scrollLeft +=
-      cellRect.left - containerRect.left - thWidth;
+    // 自動スクロール
+    scrollToInitialHour(scrollRef.current);
   }, []);
 
   return (
