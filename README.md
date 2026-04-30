@@ -33,9 +33,14 @@
 - 毎日 **0時** と **6時**（JST）に GitHub Actions が自動実行
 - 実行順序:
   1. `fetch-weather.ts` — Open-Meteo API から取得 → `src/data/weather.json` に保存
-  2. `generate-ogp.ts` — `weather.json` を読んで OGP画像を生成 → `public/ogp.png` に保存
-  3. `next build` — `weather.json` を読んで静的 HTML を `out/` に出力
-  4. GitHub Pages へデプロイ（`out/` フォルダ）
+  2. `next build` — `weather.json` を読んで静的 HTML を `out/` に出力
+  3. `npx serve out/` をバックグラウンドで起動（Playwright がアクセスするため）
+  4. `generate-ogp.ts` — Playwright で `localhost:3000/ogp` をスクリーンショット → **`out/ogp.png` に直接保存**
+  5. バックグラウンドのサーバーを停止
+  6. GitHub Pages へデプロイ（`out/` フォルダ）
+
+> **注意:** OGP画像（手順4）は `next build`（手順2）の後に生成する。  
+> `public/ogp.png` は使わず `out/ogp.png` に直接書き込むことで、ビルドのやり直しが不要になる。
 
 ---
 
@@ -87,7 +92,7 @@
 ## OGP画像仕様
 
 - サイズ: **1200 × 630px**
-- 生成: GitHub Actions 内で自動生成
+- 生成: GitHub Actions 内で Playwright によるスクリーンショットで自動生成
 
 ### 表示内容
 
@@ -162,14 +167,14 @@ tokyo-weather/
 │       └── update-weather.yml   # cron実行・デプロイ
 ├── scripts/
 │   ├── fetch-weather.ts         # 天気取得 → src/data/weather.json
-│   └── generate-ogp.ts          # weather.json → public/ogp.png (satori使用)
+│   └── generate-ogp.ts          # Playwright で /ogp をスクリーンショット → out/ogp.png
 ├── src/
 │   ├── app/
 │   │   └── page.tsx             # weather.jsonを読んで表示（Next.js App Router）
 │   └── data/
 │       └── weather.json         # 自動生成（.gitignore推奨）
 ├── public/
-│   └── ogp.png                  # 自動生成（.gitignore推奨）
+│   └── ogp.png                  # ローカル確認用プレースホルダー（本番はout/ogp.pngを使用）
 ├── next.config.js               # output: 'export' を設定
 └── README.md                      # 本仕様書
 ```
@@ -183,9 +188,9 @@ tokyo-weather/
 
 ### generate-ogp.ts
 
-- `weather.json` を読み込む
-- **satori**（Vercel製）で JSX → SVG → PNG に変換
-- `public/ogp.png` として保存
+- Playwright で `localhost:3000/ogp` にアクセス
+- ビューポートを 1200 × 630px に設定してスクリーンショットを撮影
+- `out/ogp.png` として保存（`public/ogp.png` は使用しない）
 
 ### Next.js（next build）
 
