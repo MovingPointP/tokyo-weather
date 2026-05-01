@@ -1,0 +1,71 @@
+name: Update Weather
+
+on:
+  schedule:
+    - cron: '0 15,21 * * *' # 0:00 JST / 6:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Fetch weather data
+        run: npx tsx scripts/fetch-weather.ts
+
+      - name: Build
+        run: npm run build
+
+      - name: Start static server
+        run: |
+          npx serve out/ -p 3000 &
+          echo "SERVE_PID=$!" >> $GITHUB_ENV
+
+      - name: Wait for server to be ready
+        run: |
+          for i in {1..15}; do
+            curl -s http://localhost:3000 > /dev/null && break
+            sleep 1
+          done
+
+      - name: Generate OGP image
+        run: npx tsx scripts/generate-ogp.ts
+
+      - name: Stop static server
+        run: kill $SERVE_PID || true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
