@@ -26,7 +26,7 @@ export default function WeatherTableCore({
   const filtered = hourly.filter((item) => displayTimes.includes(item.hour));
 
   return (
-    <table className={`text-xl text-center border-collapse font-bold ${className ?? ""}`}>
+    <table className={`text-2xl text-center border-collapse font-bold ${className ?? ""}`}>
       <tbody>
         <tr className="border-b-2 border-gray-400">
           <th className="sticky left-0 bg-white px-4 py-3 text-gray-600 font-medium whitespace-nowrap border-r-2 border-gray-400">
@@ -47,7 +47,7 @@ export default function WeatherTableCore({
             天気
           </th>
           {filtered.map((item) => (
-            <td key={item.hour} className="px-3 py-3 text-2xl">
+            <td key={item.hour} className="px-3 py-3 text-3xl">
               <div className="flex justify-center">
                 <Weather code={item.weather} />
               </div>
