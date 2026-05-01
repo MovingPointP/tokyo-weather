@@ -3,8 +3,8 @@ const CLOUD_PATH =
 
 const SVG_PROPS = {
   viewBox: "0 0 64 64",
-  width: 32,
-  height: 32,
+  width: 40,
+  height: 40,
   xmlns: "http://www.w3.org/2000/svg",
   "aria-hidden": true as const,
 };

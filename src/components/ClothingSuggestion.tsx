@@ -26,17 +26,17 @@ export default function ClothingSuggestion({ hourly }: Props) {
   const daytimeTemp = Math.max(...tempsInRange(10, 17));
 
   return (
-    <div className="bg-gray-50 rounded-xl px-4 py-4 flex items-center gap-2 text-gray-700 text-lg">
+    <div className="bg-gray-50 rounded-xl px-4 py-4 flex items-center gap-2 text-gray-700 text-xl">
       <span>
         朝晩: <strong>{getClothing(morningEveningTemp)}</strong>{" "}
-        <span className="text-gray-500 text-base">
+        <span className="text-gray-500 text-lg">
           ({morningEveningTemp}°C)
         </span>
       </span>
       <span className="text-gray-300">|</span>
       <span>
         日中: <strong>{getClothing(daytimeTemp)}</strong>{" "}
-        <span className="text-gray-500 text-base">({daytimeTemp}°C)</span>
+        <span className="text-gray-500 text-lg">({daytimeTemp}°C)</span>
       </span>
     </div>
   );
