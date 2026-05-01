@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <div className="max-w-5xl mx-auto px-2 py-20 flex flex-col gap-4">
+      <div className="max-w-5xl mx-auto px-2 py-20 flex flex-col gap-6">
         <Title updatedAt={updatedAt} />
         <ClothingSuggestion hourly={hourly} />
         <WeatherTable hourly={hourly} />
