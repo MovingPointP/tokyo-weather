@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description: "本日の東京都の天気予報",
   openGraph: {
     title: "東京の天気 | Tokyo Weather",
+    description: "",
     images: [{ url: "/ogp.png", width: 1200, height: 630 }],
   },
 };
