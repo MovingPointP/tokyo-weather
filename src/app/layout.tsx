@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     process.env.SITE_URL ?? "http://localhost:3000/tokyo-weather",
   ),
   title: "東京の天気 | Tokyo Weather",
-  description: "",
+  description: " ",
   openGraph: {
     title: "東京の天気 | Tokyo Weather",
-    description: "",
+    description: " ",
     images: [{ url: "/ogp.png", width: 1200, height: 630 }],
   },
 };
