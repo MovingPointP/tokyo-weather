@@ -19,7 +19,7 @@ async function main() {
 
   const page = await context.newPage();
 
-  await page.goto("http://localhost:3000/ogp", { waitUntil: "networkidle" });
+  await page.goto("http://localhost:3000/tokyo-weather/ogp", { waitUntil: "networkidle" });
 
   // スクリーンショット取得
   await page.screenshot({
