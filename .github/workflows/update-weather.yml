@@ -47,13 +47,15 @@ jobs:
 
       - name: Start static server
         run: |
-          npx serve out/ -p 3000 &
+          mkdir -p /tmp/serve-root/tokyo-weather
+          cp -r out/. /tmp/serve-root/tokyo-weather/
+          npx serve /tmp/serve-root -p 3000 &
           echo "SERVE_PID=$!" >> $GITHUB_ENV
 
       - name: Wait for server to be ready
         run: |
           for i in {1..15}; do
-            curl -s http://localhost:3000 > /dev/null && break
+            curl -s http://localhost:3000/tokyo-weather > /dev/null && break
             sleep 1
           done
 
