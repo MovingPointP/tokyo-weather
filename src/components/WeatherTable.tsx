@@ -42,11 +42,10 @@ export default function WeatherTable({ hourly }: Props) {
   }, []);
 
   return (
-    <div
-      ref={scrollRef}
-      className="overflow-x-auto rounded-xl border border-gray-300"
-    >
-      <WeatherTableCore hourly={hourly} />
+    <div className="rounded-xl border-2 border-gray-400 overflow-hidden">
+      <div ref={scrollRef} className="overflow-x-auto">
+        <WeatherTableCore hourly={hourly} />
+      </div>
     </div>
   );
 }

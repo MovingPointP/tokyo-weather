@@ -26,10 +26,10 @@ export default function WeatherTableCore({
   const filtered = hourly.filter((item) => displayTimes.includes(item.hour));
 
   return (
-    <table className={`text-xl text-center border-collapse ${className ?? ""}`}>
+    <table className={`text-xl text-center border-collapse font-bold ${className ?? ""}`}>
       <tbody>
-        <tr className="border-b border-gray-300">
-          <th className="sticky left-0 bg-white px-4 py-3 text-gray-500 font-medium whitespace-nowrap border-r border-gray-300">
+        <tr className="border-b-2 border-gray-400">
+          <th className="sticky left-0 bg-white px-4 py-3 text-gray-600 font-medium whitespace-nowrap border-r-2 border-gray-400">
             時間
           </th>
           {filtered.map((item) => (
@@ -42,8 +42,8 @@ export default function WeatherTableCore({
             </td>
           ))}
         </tr>
-        <tr className="border-b border-gray-300">
-          <th className="sticky left-0 bg-white px-4 py-3 text-gray-500 font-medium whitespace-nowrap border-r border-gray-300">
+        <tr className="border-b-2 border-gray-400">
+          <th className="sticky left-0 bg-white px-4 py-3 text-gray-600 font-medium whitespace-nowrap border-r-2 border-gray-400">
             天気
           </th>
           {filtered.map((item) => (
@@ -54,8 +54,8 @@ export default function WeatherTableCore({
             </td>
           ))}
         </tr>
-        <tr className="border-b border-gray-300">
-          <th className="sticky left-0 bg-white px-4 py-3 text-gray-500 font-medium whitespace-nowrap border-r border-gray-300">
+        <tr className="border-b-2 border-gray-400">
+          <th className="sticky left-0 bg-white px-4 py-3 text-gray-600 font-medium whitespace-nowrap border-r-2 border-gray-400">
             気温
           </th>
           {filtered.map((item) => (
@@ -68,7 +68,7 @@ export default function WeatherTableCore({
           ))}
         </tr>
         <tr>
-          <th className="sticky left-0 bg-white px-4 py-3 text-gray-500 font-medium whitespace-nowrap border-r border-gray-300">
+          <th className="sticky left-0 bg-white px-4 py-3 text-gray-600 font-medium whitespace-nowrap border-r-2 border-gray-400">
             降水
           </th>
           {filtered.map((item) => (
