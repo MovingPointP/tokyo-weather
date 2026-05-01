@@ -10,6 +10,10 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "東京の天気 | Tokyo Weather",
   description: "本日の東京都の天気予報",
+  openGraph: {
+    title: "東京の天気 | Tokyo Weather",
+    images: [{ url: "/ogp.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function RootLayout({
