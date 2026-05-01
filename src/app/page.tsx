@@ -1,18 +1,10 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-
 import Title from "@/components/Title";
 import WeatherTable from "@/components/WeatherTable";
 import ClothingSuggestion from "@/components/ClothingSuggestion";
+import { loadWeatherData } from "@/lib/weather";
 
 export default function Home() {
-  // JSON読み込み
-  const raw = readFileSync(
-    join(process.cwd(), "src/data/weather.json"),
-    "utf-8",
-  );
-
-  const { updatedAt, hourly } = JSON.parse(raw);
+  const { updatedAt, hourly } = loadWeatherData();
 
   return (
     <main className="min-h-screen bg-white">

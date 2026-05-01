@@ -1,20 +1,12 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-
 import Title from "@/components/Title";
 import WeatherTableCore from "@/components/WeatherTableCore";
 import ClothingSuggestion from "@/components/ClothingSuggestion";
+import { loadWeatherData } from "@/lib/weather";
 
 const OGP_DISPLAY_TIMES = [6, 9, 12, 15, 18, 21];
 
 export default function Home() {
-  // JSON読み込み
-  const raw = readFileSync(
-    join(process.cwd(), "src/data/weather.json"),
-    "utf-8",
-  );
-
-  const { updatedAt, hourly } = JSON.parse(raw);
+  const { updatedAt, hourly } = loadWeatherData();
 
   return (
     <main className="min-h-screen bg-white">
