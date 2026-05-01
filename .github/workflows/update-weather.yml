@@ -42,6 +42,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
 
       - name: Start static server
         run: |

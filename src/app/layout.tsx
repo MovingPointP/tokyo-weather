@@ -8,6 +8,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000/tokyo-weather"),
   title: "東京の天気 | Tokyo Weather",
   description: "本日の東京都の天気予報",
   openGraph: {
