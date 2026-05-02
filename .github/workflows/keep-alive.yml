@@ -1,0 +1,25 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # 毎週日曜 9:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: keep-alive
+
+      - name: Empty commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "chore: keep alive [skip ci]"
+          git push
