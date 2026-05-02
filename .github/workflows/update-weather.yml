@@ -75,3 +75,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Send URL to Discord
+        if: github.event.schedule == '7 21 * * *'
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d '{"content": "${{ vars.SITE_URL }}"}' \
+               "${{ secrets.DISCORD_WEBHOOK_URL }}"
