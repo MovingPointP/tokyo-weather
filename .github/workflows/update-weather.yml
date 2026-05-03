@@ -2,7 +2,8 @@ name: Update Weather
 
 on:
   schedule:
-    - cron: '7 15,21 * * *' # 0:07 JST / 6:07 JST
+    - cron: '7 15 * * *' # 0:07 JST
+    - cron: '7 21 * * *' # 6:07 JST
   workflow_dispatch:
 
 permissions:
@@ -77,7 +78,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Send URL to Discord
-        if: github.event.schedule == '7 21 * * *'
+        if: github.event.schedule == '7 21 * * *' || github.event_name == 'workflow_dispatch'
         run: |
           curl -H "Content-Type: application/json" \
                -d '{"content": "${{ vars.SITE_URL }}"}' \
