@@ -1,9 +1,10 @@
 name: Update Weather
 
 on:
-  schedule:
-    - cron: '7 15 * * *' # 0:07 JST
-    - cron: '7 21 * * *' # 6:07 JST
+  schedule: # 実際にjobが開始されるまで時間がかかるため、15分前に開始
+    - cron: "45 14 * * *" # 11:45 JST
+    - cron: "45 20 * * *" # 5:45 JST
+    - cron: "45 2 * * *" # 11:45 JST
   workflow_dispatch:
 
 permissions:
@@ -31,8 +32,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
