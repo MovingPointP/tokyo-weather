@@ -1,10 +1,6 @@
 name: Update Weather
 
 on:
-  schedule: # 実際にjobが開始されるまで時間がかかるため、15分前に開始
-    - cron: "45 14 * * *" # 11:45 JST
-    - cron: "45 20 * * *" # 5:45 JST
-    - cron: "45 2 * * *" # 11:45 JST
   workflow_dispatch:
 
 permissions:
@@ -77,10 +73,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Send URL to Discord
-        if: github.event.schedule == '7 21 * * *' || github.event_name == 'workflow_dispatch'
-        run: |
-          curl -H "Content-Type: application/json" \
-               -d '{"content": "${{ vars.SITE_URL }}"}' \
-               "${{ secrets.DISCORD_WEBHOOK_URL }}"

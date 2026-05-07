@@ -1,0 +1,15 @@
+name: Notify Discord
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send URL to Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d '{"content": "${{ vars.SITE_URL }}"}' \
+               "${{ secrets.DISCORD_WEBHOOK_URL }}"
